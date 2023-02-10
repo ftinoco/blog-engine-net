@@ -7,3 +7,9 @@ public enum PostStatus : int
     Approved = 1,
     Rejected = 2,
 }
+
+public enum Role : int
+{
+    Editor = 0,
+    Writer = 1,
+}
