@@ -7,11 +7,7 @@ namespace BlogEngineNet.Core.Services.Implementations;
 
 public class UserService : IUserService
 {
-    public readonly IApplicationDbContext _context;
-    private readonly List<User> _users = new()
-    {
-        new User { UserId = 1, FirstName = "Test", LastName = "User", Role = Domain.Role.Editor, Username = "test", Password = "test" }
-    };
+    public readonly IApplicationDbContext _context; 
     public UserService(IApplicationDbContext context)
     {
         _context = context;
@@ -19,7 +15,7 @@ public class UserService : IUserService
 
     public UserInfoModel Authenticate(LoginModel model)
     {
-        User user = _users.SingleOrDefault(u =>
+        User user = _context.Users.SingleOrDefault(u =>
                                 u.Username == model.Username &&
                                 u.Password == model.Password);
         if (user == null) return null;
@@ -29,6 +25,6 @@ public class UserService : IUserService
 
     public User GetById(int id)
     {
-        return _users.FirstOrDefault(x => x.UserId == id);
+        return _context.Users.FirstOrDefault(x => x.UserId == id);
     } 
 }
