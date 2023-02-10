@@ -1,10 +1,12 @@
 using BlogEngineNet.API.Utils;
+using BlogEngineNet.Core.Domain;
 using BlogEngineNet.Core.Models;
 using BlogEngineNet.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 /*using BlogEngineNet.API.Utils.Filters;*/
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace BlogEngineNet.API.Controllers
 {
@@ -42,6 +44,7 @@ namespace BlogEngineNet.API.Controllers
             return Ok(response);
         }
 
+        [Authorize(Roles = nameof(Role.Writer))]
         [HttpGet("GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -55,7 +58,7 @@ namespace BlogEngineNet.API.Controllers
             .ToArray();
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(Role.Editor))]
         [HttpGet("GetAllWeather")]
         public IEnumerable<WeatherForecast> GetAll()
         {

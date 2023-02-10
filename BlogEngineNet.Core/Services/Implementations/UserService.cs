@@ -10,7 +10,7 @@ public class UserService : IUserService
     public readonly IApplicationDbContext _context;
     private readonly List<User> _users = new()
     {
-        new User { UserId = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
+        new User { UserId = 1, FirstName = "Test", LastName = "User", Role = Domain.Role.Editor, Username = "test", Password = "test" }
     };
     public UserService(IApplicationDbContext context)
     {
