@@ -22,8 +22,8 @@ internal class PostTrackingConfiguration
         entityBuilder.HasOne(x => x.Post)
                      .WithMany(y => y.Trackings)
                      .HasForeignKey(z => z.PostId)
-                     .HasConstraintName("FK_Post_Tracking"); 
-
+                     .HasConstraintName("FK_Post_Tracking");
+         
         entityBuilder.ToTable("PostTracking", schema: "Blog");
     }
 }

@@ -22,6 +22,11 @@ internal class PostConfiguration
         entityBuilder.Property(x => x.LastModifiedBy).HasMaxLength(64);
         entityBuilder.Property(x => x.CreatedDate).HasDefaultValueSql("GETDATE()");
 
+        entityBuilder.HasOne(x => x.Author)
+                     .WithMany(y => y.Posts)
+                     .HasForeignKey(z => z.AuthorId)
+                     .HasConstraintName("FK_Post_Author");
+
         entityBuilder.ToTable("Post", schema: "Blog");
     }
 }
