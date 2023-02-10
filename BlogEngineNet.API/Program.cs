@@ -1,5 +1,6 @@
 using BlogEngineNet.API.Utils;
 using BlogEngineNet.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,7 +39,13 @@ builder.Services.AddSwaggerGen(option =>
 });
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddPersistenceDependencies(builder.Configuration);
- 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+   .AddJwtBearer(x =>
+   {
+       x.
+   }) ;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,6 +60,7 @@ app.UseHttpsRedirection();
 app.UseMiddleware<JwtMiddleware>();
 
 //app.UseAuthorization();
+
 
 app.MapControllers();
 
