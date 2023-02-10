@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlogEngineNet.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Data;
 
@@ -21,4 +22,9 @@ public interface IApplicationDbContext
     int SaveChanges();
 
     DbSet<TEntity> Set<TEntity>() where TEntity : class;
+
+    DbSet<User> Users { get; set; }
+    DbSet<Post> Posts { get; set; }
+    DbSet<Comment> Comments { get; set; }
+    DbSet<PostTracking> PostTrackings { get; set; }
 }
