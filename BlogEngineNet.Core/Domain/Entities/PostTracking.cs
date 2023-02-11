@@ -4,7 +4,7 @@
     {
         public Guid PostTrackingId { get; set; }
         public Guid PostId { get; set; }
-        public int ReviewerId { get; set; }
+        public int? ReviewerId { get; set; }
         public PostStatus PostStatus { get; set; }
         public string Comments { get; set; }
         public bool LastStatus { get; set; }

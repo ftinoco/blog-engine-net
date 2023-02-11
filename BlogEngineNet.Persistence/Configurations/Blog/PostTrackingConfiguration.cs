@@ -14,6 +14,7 @@ internal class PostTrackingConfiguration
                      .HasColumnName("Id")
                      .HasDefaultValueSql("NEWID()");
         entityBuilder.Property(x => x.Comments).HasMaxLength(512);
+        entityBuilder.Property(x => x.ReviewerId);
         entityBuilder.Property(x => x.PostStatus).HasConversion<int>().IsRequired();
         entityBuilder.Property(x => x.LastStatus).HasColumnType("bit").IsRequired();
         entityBuilder.Property(x => x.LastModifiedBy).HasMaxLength(64);
