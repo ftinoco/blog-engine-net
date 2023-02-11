@@ -2,6 +2,7 @@
 using BlogEngineNet.Core.Domain.Entities;
 using BlogEngineNet.Core.Domain.Persistence;
 using BlogEngineNet.Core.Models;
+using BlogEngineNet.Core.Models.Security;
 using BlogEngineNet.Core.Services.Interfaces;
 
 namespace BlogEngineNet.Core.Services.Implementations;
@@ -43,7 +44,7 @@ public class UserService : IUserService
     }
 
     public Result<User> GetById(int id)
-    {
+    { 
         var result = new Result<User>();
         try
         {
@@ -67,5 +68,5 @@ public class UserService : IUserService
             // the exception should be register in log
         }
         return result;
-    }
+    } 
 }

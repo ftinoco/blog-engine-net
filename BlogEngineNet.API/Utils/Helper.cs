@@ -1,5 +1,5 @@
 ﻿using BlogEngineNet.Core.Domain;
-using BlogEngineNet.Core.Models;
+using BlogEngineNet.Core.Models.Security;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

@@ -1,12 +1,12 @@
 ﻿using BlogEngineNet.Core.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogEngineNet.Core.Models;
+namespace BlogEngineNet.Core.Models.Blog;
 
 public class CreateTrackingModel
 {
     [Required]
-    public Guid PostId { get; set; } 
+    public Guid PostId { get; set; }
     public int? ReviewerId { get; set; }
     [Required]
     public PostStatus PostStatus { get; set; }

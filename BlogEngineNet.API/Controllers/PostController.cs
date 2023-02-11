@@ -1,5 +1,5 @@
 ﻿using BlogEngineNet.Core.Domain;
-using BlogEngineNet.Core.Models;
+using BlogEngineNet.Core.Models.Blog;
 using BlogEngineNet.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +35,7 @@ namespace BlogEngineNet.API.Controllers
         }
 
         [HttpPost("AddPostComment")]
-        public IActionResult PostComment([FromBody] CommentModel comment)
+        public IActionResult PostComment([FromBody] CreateCommentModel comment)
         {
             var result = _commentService.AddCommentToPost(comment);
             return result.ResultType switch

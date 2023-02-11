@@ -1,7 +1,7 @@
 using BlogEngineNet.API.Utils;
 using BlogEngineNet.Core.Domain;
-using BlogEngineNet.Core.Models;
-using BlogEngineNet.Core.Services.Interfaces; 
+using BlogEngineNet.Core.Models.Security;
+using BlogEngineNet.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

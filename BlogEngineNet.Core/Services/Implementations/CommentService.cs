@@ -2,6 +2,7 @@
 using BlogEngineNet.Core.Domain.Entities;
 using BlogEngineNet.Core.Domain.Persistence;
 using BlogEngineNet.Core.Models;
+using BlogEngineNet.Core.Models.Blog;
 using BlogEngineNet.Core.Services.Interfaces;
 
 namespace BlogEngineNet.Core.Services.Implementations;
@@ -22,7 +23,7 @@ public class CommentService : ICommentService
         _userService = userService;
     }
 
-    public Result<bool> AddCommentToPost(CommentModel comment)
+    public Result<bool> AddCommentToPost(CreateCommentModel comment)
     {
         Result<bool> result = new();
         var postResult = _postService.GetById(comment.PostId);

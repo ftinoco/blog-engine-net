@@ -1,4 +1,4 @@
-﻿namespace BlogEngineNet.Core.Models;
+﻿namespace BlogEngineNet.Core.Models.Blog;
 
 public class PostModel
 {

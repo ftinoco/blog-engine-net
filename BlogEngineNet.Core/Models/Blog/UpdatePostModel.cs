@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogEngineNet.Core.Models
+namespace BlogEngineNet.Core.Models.Blog
 {
     public class UpdatePostModel
     {

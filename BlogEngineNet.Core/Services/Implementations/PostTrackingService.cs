@@ -3,6 +3,7 @@ using BlogEngineNet.Core.Domain;
 using BlogEngineNet.Core.Domain.Persistence;
 using BlogEngineNet.Core.Models;
 using BlogEngineNet.Core.Services.Interfaces;
+using BlogEngineNet.Core.Models.Blog;
 
 namespace BlogEngineNet.Core.Services.Implementations;
 

@@ -2,6 +2,7 @@
 using BlogEngineNet.Core.Domain.Entities;
 using BlogEngineNet.Core.Domain.Persistence;
 using BlogEngineNet.Core.Models;
+using BlogEngineNet.Core.Models.Blog;
 using BlogEngineNet.Core.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
