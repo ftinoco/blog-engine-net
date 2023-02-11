@@ -9,6 +9,7 @@ public static class DependencyInjection
     public static IServiceCollection AddCoreDependencies(this IServiceCollection services )
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPostService, PostService>();
         return services;
     }
 }  
