@@ -14,18 +14,36 @@ public class UserService : IUserService
         _context = context;
     }
 
-    public UserInfoModel Authenticate(LoginModel model)
+    public Result<UserInfoModel> Authenticate(LoginModel model)
     {
-        User user = _context.Users.SingleOrDefault(u =>
-                                u.Username == model.Username &&
-                                u.Password == model.Password);
-        if (user == null) return null;
-         
-        return new UserInfoModel(user);
+        Result<UserInfoModel> result = new();
+        try
+        {
+            User user = _context.Users.SingleOrDefault(u =>
+                                    u.Username == model.Username &&
+                                    u.Password == model.Password);
+            if (user is null)
+            {
+                result.Message = "Username or password is incorrect";
+                result.ResultType = ResultType.ERROR;
+            }
+            else
+            {
+                result.Value = new UserInfoModel(user); 
+                result.Message = "Logged in";
+                result.ResultType = ResultType.SUCCESS;
+            }
+        }
+        catch (Exception ex)
+        {
+            result.Exception = ex;
+        }
+
+        return result;
     }
 
     public Result<User> GetById(int id)
-    { 
+    {
         var result = new Result<User>();
         try
         {
@@ -49,5 +67,5 @@ public class UserService : IUserService
             // the exception should be register in log
         }
         return result;
-    } 
+    }
 }

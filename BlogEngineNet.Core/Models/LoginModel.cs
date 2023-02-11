@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogEngineNet.Core.Models;
-
-public class LoginModel
+namespace BlogEngineNet.Core.Models
 {
-    [Required]
-    public string Username { get; set; }
+    public class LoginModel
+    {
+        [Required]
+        [MaxLength(8)]
+        public string Username { get; set; }
 
-    [Required]
-    public string Password { get; set; }
+        [Required]
+        [MaxLength(16)]
+        public string Password { get; set; }
+    }
 }
