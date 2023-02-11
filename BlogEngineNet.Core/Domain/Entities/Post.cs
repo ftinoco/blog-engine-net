@@ -9,8 +9,8 @@ public class Post: AuditableEntity
     public int AuthorId { get; set; }
 
 
-    public User Author { get; set; }
-    public IQueryable<Comment> Comments { get; set; }
-    public IQueryable<PostTracking> Trackings { get; set; }
+    public virtual User Author { get; set; }
+    public IEnumerable<Comment> Comments { get; set; }
+    public IEnumerable<PostTracking> Trackings { get; set; }
 
 }

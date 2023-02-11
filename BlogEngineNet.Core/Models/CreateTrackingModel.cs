@@ -1,19 +1,17 @@
 ﻿using BlogEngineNet.Core.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogEngineNet.Core.Models
+namespace BlogEngineNet.Core.Models;
+
+public class CreateTrackingModel
 {
-    public class CreateTrackingModel
-    {
-        [Required]
-        public Guid PostId { get; set; }
-        [Required]
-        public int ReviewerId { get; set; }
-        [Required]
-        public PostStatus PostStatus { get; set; }
-        [MaxLength(512)]
-        public string Comments { get; set; }
-        [Required]
-        public string LastModifiedBy { get; set; }
-    }
+    [Required]
+    public Guid PostId { get; set; } 
+    public int? ReviewerId { get; set; }
+    [Required]
+    public PostStatus PostStatus { get; set; }
+    [MaxLength(512)]
+    public string Comments { get; set; }
+    [Required]
+    public string LastModifiedBy { get; set; }
 }

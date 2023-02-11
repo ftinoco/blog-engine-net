@@ -22,3 +22,8 @@ public class RejectPostModel: PostStatusModel
     public override PostStatus Status => PostStatus.Rejected;
     public string Comment { get; set; }
 }
+
+public class SubmitPostModel : PostStatusModel
+{
+    public override PostStatus Status => PostStatus.Submitted; 
+}

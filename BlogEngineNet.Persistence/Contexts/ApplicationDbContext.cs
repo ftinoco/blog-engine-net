@@ -19,7 +19,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<PostTracking> PostTrackings { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) { }
+        : base(options) {
+        ChangeTracker.LazyLoadingEnabled = true;
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
