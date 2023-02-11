@@ -8,9 +8,9 @@ namespace BlogEngineNet.Core.Services.Implementations;
 
 public class CommentService : ICommentService
 {
-    public readonly IApplicationDbContext _context;
-    public readonly IPostService _postService;
-    public readonly IUserService _userService;
+    private readonly IApplicationDbContext _context;
+    private readonly IPostService _postService;
+    private readonly IUserService _userService;
 
     public CommentService(
         IApplicationDbContext context,

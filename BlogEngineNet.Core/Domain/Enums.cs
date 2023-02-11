@@ -2,10 +2,10 @@
 
 public enum PostStatus : int
 {
-    Published = 3,
-    PendingApproval = 0,
-    Approved = 1,
+    New = 0,
+    Submitted = 1,
     Rejected = 2,
+    Published = 3
 }
 
 public enum Role : int

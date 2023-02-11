@@ -8,7 +8,7 @@ namespace BlogEngineNet.Core.Services.Implementations;
 
 public class UserService : IUserService
 {
-    public readonly IApplicationDbContext _context; 
+    private readonly IApplicationDbContext _context; 
     public UserService(IApplicationDbContext context)
     {
         _context = context;
