@@ -22,7 +22,7 @@ namespace BlogEngineNet.Core.Services.Implementations
                 IQueryable<Post> posts = _context.Posts.Where(p =>
                                         p.Status == PostStatus.Published
                                     );
-                if (posts.Count() > 0)
+                if (posts.Any())
                 {
                     result.Value = MapPostModel(posts);
                     result.Message = "Information obtained successfully";
@@ -43,6 +43,35 @@ namespace BlogEngineNet.Core.Services.Implementations
             return result;
         }
 
+        public Result<Post> GetById(Guid postId)
+        {
+            var result = new Result<Post>();
+            try
+            {
+                var post = _context.Posts.SingleOrDefault(p => p.PostId == postId);
+                result.Value = post;
+                if (post is null)
+                {
+                    result.Message = "Post record not found";
+                    result.ResultType = ResultType.INFO;
+                }
+                else
+                {
+                    result.Value = post;
+                    result.Message = "Record obtained successfully";
+                    result.ResultType = ResultType.SUCCESS;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+                // the exception should be register in log
+            }
+            return result;
+        }
+
+        #region Private methods
+
         private static IEnumerable<PostModel> MapPostModel(IQueryable<Post> posts)
         {
             foreach (var item in posts)
@@ -57,6 +86,8 @@ namespace BlogEngineNet.Core.Services.Implementations
                     Title = item.Title
                 };
         }
+
+        #endregion
 
     }
 }

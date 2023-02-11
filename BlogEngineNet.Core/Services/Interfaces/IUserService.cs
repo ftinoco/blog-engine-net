@@ -5,7 +5,7 @@ namespace BlogEngineNet.Core.Services.Interfaces
 {
     public interface IUserService
     {
-        User GetById(int id);
+        Result<User> GetById(int id);
         UserInfoModel Authenticate(LoginModel user);
     }
 }

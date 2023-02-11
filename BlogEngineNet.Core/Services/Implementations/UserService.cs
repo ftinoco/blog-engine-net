@@ -1,4 +1,5 @@
-﻿using BlogEngineNet.Core.Domain.Entities;
+﻿using BlogEngineNet.Core.Domain;
+using BlogEngineNet.Core.Domain.Entities;
 using BlogEngineNet.Core.Domain.Persistence;
 using BlogEngineNet.Core.Models;
 using BlogEngineNet.Core.Services.Interfaces;
@@ -23,8 +24,30 @@ public class UserService : IUserService
         return new UserInfoModel(user);
     }
 
-    public User GetById(int id)
-    {
-        return _context.Users.FirstOrDefault(x => x.UserId == id);
+    public Result<User> GetById(int id)
+    { 
+        var result = new Result<User>();
+        try
+        {
+            var user = _context.Users.SingleOrDefault(x => x.UserId == id);
+            result.Value = user;
+            if (user is null)
+            {
+                result.Message = "User record not found";
+                result.ResultType = ResultType.INFO;
+            }
+            else
+            {
+                result.Value = user;
+                result.Message = "Record obtained successfully";
+                result.ResultType = ResultType.SUCCESS;
+            }
+        }
+        catch (Exception ex)
+        {
+            result.Exception = ex;
+            // the exception should be register in log
+        }
+        return result;
     } 
 }
