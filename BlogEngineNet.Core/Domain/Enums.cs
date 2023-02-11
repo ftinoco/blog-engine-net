@@ -13,3 +13,11 @@ public enum Role : int
     Editor = 0,
     Writer = 1,
 }
+
+public enum ResultType
+{
+    INFO,
+    ERROR,
+    SUCCESS,
+    WARNING
+}
