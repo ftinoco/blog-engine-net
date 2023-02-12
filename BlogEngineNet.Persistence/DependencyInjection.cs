@@ -15,7 +15,7 @@ public static class DependencyInjection
 
         services.AddCoreDependencies();
         services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseSqlServer(configuration.GetConnectionString("BlogEngineConnection"),
+                 options.UseSqlServer(configuration.GetConnectionString("AzureBlogEngineConnection"),
                      b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
