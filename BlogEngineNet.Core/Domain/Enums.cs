@@ -12,6 +12,7 @@ public enum Role : int
 {
     Editor = 0,
     Writer = 1,
+    Public = 2,
 }
 
 public enum ResultType

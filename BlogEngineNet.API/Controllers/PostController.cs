@@ -49,7 +49,7 @@ namespace BlogEngineNet.API.Controllers
 
         #region Editor
 
-        [HttpGet("GetAllPendingPost")]
+        [HttpGet("GetAllPendingPosts")]
         [Authorize(Roles = nameof(Role.Editor))]
         public IActionResult GetAllPendingPost()
         {
@@ -90,7 +90,7 @@ namespace BlogEngineNet.API.Controllers
 
         #region Writer
 
-        [HttpGet("GetAllPostByAuthor/{authorId}")]
+        [HttpGet("GetAllPostsByAuthor/{authorId}")]
         [Authorize(Roles = nameof(Role.Writer))]
         public IActionResult GetAllPostByAuthor(int authorId)
         {

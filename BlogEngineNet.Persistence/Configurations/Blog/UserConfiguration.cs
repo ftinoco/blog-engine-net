@@ -44,6 +44,16 @@ internal class UserConfiguration
             Role = Core.Domain.Role.Writer,
             LastModifiedBy = "Test",
             Username = "FJackson",
+        }, new User
+        {
+            FirstName = "Richard",
+            UserId = 3,
+            CreatedBy = "Test",
+            LastName = "Ashcroft",
+            Password = "SafePassword",
+            Role = Core.Domain.Role.Public,
+            LastModifiedBy = "Test",
+            Username = "Ashcroft",
         });
     }
 }
