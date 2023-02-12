@@ -1,0 +1,385 @@
+{
+	"info": {
+		"_postman_id": "c215a27f-9858-4e60-9e76-d4abfd78148e",
+		"name": "BlogEngine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LoginAsEditor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"{{EditorUser}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/User/Authenticate",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"User",
+						"Authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAsWriter",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"{{WriterUser}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/User/Authenticate",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"User",
+						"Authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPostsByAuthor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImMxYjUwODYwLWMxNmYtNDQxZC1hNzVhLTJiZWNiNWUzNDIxMyIsInN1YiI6IkZKYWNrc29uIiwiZW1haWwiOiJGSmFja3NvbiIsImp0aSI6IjFkYjFhZDAwLTI5MTgtNDc4OS05M2E2LTU4MDFhNWVkOTQ3MiIsInJvbGUiOiJXcml0ZXIiLCJuYmYiOjE2NzYxNjg4MzMsImV4cCI6MTY3NjE2OTEzMywiaWF0IjoxNjc2MTY4ODMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDg0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCJ9.s94PFV2_gp7qg5_Uja2PangWy-GpYMVbUaORMsH8U_g7fJrMmLOdM1GieJA_COwYkKDk9qZyC0ANuOwFvx6Z5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Post/GetAllPostsByAuthor/2",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"GetAllPostsByAuthor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImMxYjUwODYwLWMxNmYtNDQxZC1hNzVhLTJiZWNiNWUzNDIxMyIsInN1YiI6IkZKYWNrc29uIiwiZW1haWwiOiJGSmFja3NvbiIsImp0aSI6IjFkYjFhZDAwLTI5MTgtNDc4OS05M2E2LTU4MDFhNWVkOTQ3MiIsInJvbGUiOiJXcml0ZXIiLCJuYmYiOjE2NzYxNjg4MzMsImV4cCI6MTY3NjE2OTEzMywiaWF0IjoxNjc2MTY4ODMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDg0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCJ9.s94PFV2_gp7qg5_Uja2PangWy-GpYMVbUaORMsH8U_g7fJrMmLOdM1GieJA_COwYkKDk9qZyC0ANuOwFvx6Z5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"This is a post\",\r\n  \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\r\n  \"authorId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/CreatePost",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"CreatePost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImMxYjUwODYwLWMxNmYtNDQxZC1hNzVhLTJiZWNiNWUzNDIxMyIsInN1YiI6IkZKYWNrc29uIiwiZW1haWwiOiJGSmFja3NvbiIsImp0aSI6IjFkYjFhZDAwLTI5MTgtNDc4OS05M2E2LTU4MDFhNWVkOTQ3MiIsInJvbGUiOiJXcml0ZXIiLCJuYmYiOjE2NzYxNjg4MzMsImV4cCI6MTY3NjE2OTEzMywiaWF0IjoxNjc2MTY4ODMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDg0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCJ9.s94PFV2_gp7qg5_Uja2PangWy-GpYMVbUaORMsH8U_g7fJrMmLOdM1GieJA_COwYkKDk9qZyC0ANuOwFvx6Z5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"postId\": \"C465D186-D445-462C-92F2-B5C1D549BD73\",\r\n  \"title\": \"Changing the post title\", \r\n  \"authorId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/UpdatePost",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"UpdatePost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubmitPost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImMxYjUwODYwLWMxNmYtNDQxZC1hNzVhLTJiZWNiNWUzNDIxMyIsInN1YiI6IkZKYWNrc29uIiwiZW1haWwiOiJGSmFja3NvbiIsImp0aSI6IjFkYjFhZDAwLTI5MTgtNDc4OS05M2E2LTU4MDFhNWVkOTQ3MiIsInJvbGUiOiJXcml0ZXIiLCJuYmYiOjE2NzYxNjg4MzMsImV4cCI6MTY3NjE2OTEzMywiaWF0IjoxNjc2MTY4ODMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDg0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCJ9.s94PFV2_gp7qg5_Uja2PangWy-GpYMVbUaORMsH8U_g7fJrMmLOdM1GieJA_COwYkKDk9qZyC0ANuOwFvx6Z5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"postId\": \"C465D186-D445-462C-92F2-B5C1D549BD73\",\r\n  \"userId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/SubmitPost",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"SubmitPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPendingPosts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjA5NTRhODZhLWM0ZGMtNDcwYS05YTU4LWM1MmM5NzA3YWQzZiIsInN1YiI6IkpEb2UiLCJlbWFpbCI6IkpEb2UiLCJqdGkiOiIyNDUzYTJmYi1lNGIzLTQ3MWEtYTc5OC1lZGMwNDc1NjlkYTgiLCJyb2xlIjoiRWRpdG9yIiwibmJmIjoxNjc2MTY5MzA1LCJleHAiOjE2NzYxNjk2MDUsImlhdCI6MTY3NjE2OTMwNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODQifQ.Kfv6ZaD6RdrqLYqzmNtf__X5usD0OnYrQcPbKJgUJRLn0gg3e779LH6-M7bRcuNplCb7Ht_Zu7wj5LWd2GG84Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Post/GetAllPendingPosts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"GetAllPendingPosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApprovePost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjA5NTRhODZhLWM0ZGMtNDcwYS05YTU4LWM1MmM5NzA3YWQzZiIsInN1YiI6IkpEb2UiLCJlbWFpbCI6IkpEb2UiLCJqdGkiOiIyNDUzYTJmYi1lNGIzLTQ3MWEtYTc5OC1lZGMwNDc1NjlkYTgiLCJyb2xlIjoiRWRpdG9yIiwibmJmIjoxNjc2MTY5MzA1LCJleHAiOjE2NzYxNjk2MDUsImlhdCI6MTY3NjE2OTMwNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODQifQ.Kfv6ZaD6RdrqLYqzmNtf__X5usD0OnYrQcPbKJgUJRLn0gg3e779LH6-M7bRcuNplCb7Ht_Zu7wj5LWd2GG84Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"postId\": \"C465D186-D445-462C-92F2-B5C1D549BD73\",\r\n  \"userId\": 1 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/ApprovePost",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"ApprovePost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RejectPost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjA5NTRhODZhLWM0ZGMtNDcwYS05YTU4LWM1MmM5NzA3YWQzZiIsInN1YiI6IkpEb2UiLCJlbWFpbCI6IkpEb2UiLCJqdGkiOiIyNDUzYTJmYi1lNGIzLTQ3MWEtYTc5OC1lZGMwNDc1NjlkYTgiLCJyb2xlIjoiRWRpdG9yIiwibmJmIjoxNjc2MTY5MzA1LCJleHAiOjE2NzYxNjk2MDUsImlhdCI6MTY3NjE2OTMwNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA4NCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwODQifQ.Kfv6ZaD6RdrqLYqzmNtf__X5usD0OnYrQcPbKJgUJRLn0gg3e779LH6-M7bRcuNplCb7Ht_Zu7wj5LWd2GG84Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"postId\": \"C465D186-D445-462C-92F2-B5C1D549BD73\",\r\n  \"userId\": 1, \r\n  \"comment\": \"Change the title\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/RejectPost",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"RejectPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPublishedPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Post/GetAllPublishedPosts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"GetAllPublishedPosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPostComment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"content\": \"This is a new comment\",\r\n  \"userId\": 3,\r\n  \"postId\": \"C465D186-D445-462C-92F2-B5C1D549BD73\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Post/AddPostComment",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Post",
+						"AddPostComment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
