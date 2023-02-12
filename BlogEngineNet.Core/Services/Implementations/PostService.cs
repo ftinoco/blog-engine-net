@@ -295,8 +295,9 @@ public class PostService : IPostService
             {
                 if (!ValidateStatusChangeFlow(post, model.Status))
                 {
-                    result.Message = $"It is not possible to change the post status to {nameof(model.Status)} since breaks the status flow";
+                    result.Message = $"It is not possible to change the post status to '{model.Status.ToString()}' since breaks the status flow";
                     result.ResultType = ResultType.ERROR;
+                    return result;
                 }
 
                 post.Status = model.Status;
@@ -382,7 +383,7 @@ public class PostService : IPostService
             case PostStatus.Rejected:
                 return newStatus == PostStatus.Rejected || newStatus == PostStatus.Submitted;
             case PostStatus.Published:
-                return true;
+                return false;
         }
         return false;
     }
