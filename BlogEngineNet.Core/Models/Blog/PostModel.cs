@@ -7,4 +7,7 @@ public class PostModel
     public DateTime? PublicationDate { get; set; }
     public string Author { get; set; }
     public string Status { get; set; }
+
+    public List<CommentModel> UserComments { get; set; }
+    public List<CommentModel> EditorComments { get; set; }
 }

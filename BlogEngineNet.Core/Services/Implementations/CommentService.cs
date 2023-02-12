@@ -33,6 +33,15 @@ public class CommentService : ICommentService
             result.Message = postResult.Message;
             return result;
         }
+        else
+        {
+            if(postResult.Value.Status != PostStatus.Published)
+            {
+                result.ResultType = ResultType.ERROR;
+                result.Message = "Comments only in published posts";
+                return result;
+            }
+        }
 
         var userResult = _userService.GetById(comment.UserId);
         if (userResult.ResultType != ResultType.SUCCESS)
@@ -49,6 +58,7 @@ public class CommentService : ICommentService
                 Content = comment.Content,
                 CreatedBy = userResult.Value.Username,
                 CreatedDate = DateTime.Now,
+                LastModifiedBy= userResult.Value.Username,
                 PostId = comment.PostId
             });
             _context.SaveChanges(); 

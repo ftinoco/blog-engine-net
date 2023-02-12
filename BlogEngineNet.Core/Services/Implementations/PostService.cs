@@ -5,6 +5,7 @@ using BlogEngineNet.Core.Models;
 using BlogEngineNet.Core.Models.Blog;
 using BlogEngineNet.Core.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 
 namespace BlogEngineNet.Core.Services.Implementations;
 
@@ -41,10 +42,11 @@ public class PostService : IPostService
         {
             IQueryable<Post> posts = _context.Posts.Include(u => u.Author)
                                                    .Include(t => t.Trackings)
+                                                   .Include(c => c.Comments)
                                              .Where(p => p.AuthorId == authorId);
             if (posts.Any())
             {
-                result.Value = MapPostModel(posts);
+                result.Value = MapPostModel(posts, true);
                 result.Message = "Information obtained successfully";
                 result.ResultType = ResultType.SUCCESS;
             }
@@ -125,14 +127,14 @@ public class PostService : IPostService
                 CreatedDate = DateTime.Now,
                 Status = PostStatus.New,
                 Title = model.Title,
-                LastModifiedBy= userResult.Value.Username,
+                LastModifiedBy = userResult.Value.Username,
             };
 
             _context.Posts.Add(post);
             _context.SaveChanges();
 
             result = _postTrackingService.SaveTracking(new CreateTrackingModel()
-            { 
+            {
                 LastModifiedBy = userResult.Value.Username,
                 PostId = post.PostId,
                 PostStatus = PostStatus.New,
@@ -174,8 +176,8 @@ public class PostService : IPostService
             var post = _context.Posts.SingleOrDefault(p => p.PostId == model.PostId);
 
             if (post != null)
-            { 
-                if(post.Status != PostStatus.New && post.Status != PostStatus.Rejected)
+            {
+                if (post.Status != PostStatus.New && post.Status != PostStatus.Rejected)
                 {
                     result.ResultType = ResultType.ERROR;
                     result.Message = "The post should be new or rejected to update";
@@ -185,14 +187,14 @@ public class PostService : IPostService
                 post.LastModifiedDate = DateTime.Now;
                 post.LastModifiedBy = userResult.Value.Username;
                 post.Title = model.Title ?? post.Title;
-                post.Content= model.Content ?? post.Content;
+                post.Content = model.Content ?? post.Content;
 
                 _context.Posts.Update(post);
                 _context.SaveChanges();
 
                 result = _postTrackingService.SaveTracking(new CreateTrackingModel()
-                { 
-                    LastModifiedBy = userResult.Value.Username, 
+                {
+                    LastModifiedBy = userResult.Value.Username,
                     PostId = post.PostId,
                     PostStatus = post.Status,
                 });
@@ -223,20 +225,22 @@ public class PostService : IPostService
 
     #region Private methods
 
-    private static IEnumerable<PostModel> MapPostModel(IEnumerable<Post> posts)
+    private static IEnumerable<PostModel> MapPostModel(IEnumerable<Post> posts, bool byAuthor = false)
     {
-        foreach (var item in posts) {
-            var trackings = item.Trackings.Where(x =>
-                                        x.LastStatus &&
-                                        x.PostStatus == PostStatus.Published
-                                  );
+        foreach (var item in posts)
+        {
+            // getting editor comments
+            var editorComments = byAuthor ? GetEditorComments(item) : new List<CommentModel>();
+
             yield return new PostModel()
             {
                 Author = string.Concat(item.Author.FirstName, " ", item.Author.LastName),
                 Content = item.Content,
-                PublicationDate = trackings.Any() ? trackings.FirstOrDefault().LastModifiedDate : null,
+                PublicationDate = GetPublicationDate(item),
                 Title = item.Title,
                 Status = item.Status.ToString(),
+                UserComments = GetUsersComments(item),
+                EditorComments = editorComments
             };
         }
     }
@@ -248,6 +252,7 @@ public class PostService : IPostService
         {
             IQueryable<Post> posts = _context.Posts.Include(u => u.Author)
                                                    .Include(t => t.Trackings)
+                                                   .Include(c => c.Comments)
                                              .Where(p => p.Status == status);
             if (posts.Any())
             {
@@ -288,6 +293,12 @@ public class PostService : IPostService
 
             if (post != null)
             {
+                if (!ValidateStatusChangeFlow(post, model.Status))
+                {
+                    result.Message = $"It is not possible to change the post status to {nameof(model.Status)} since breaks the status flow";
+                    result.ResultType = ResultType.ERROR;
+                }
+
                 post.Status = model.Status;
                 post.LastModifiedDate = DateTime.Now;
                 post.LastModifiedBy = userResult.Value.Username;
@@ -326,6 +337,54 @@ public class PostService : IPostService
             transaction.Rollback();
         }
         return result;
+    }
+
+    private static List<CommentModel> GetUsersComments(Post item)
+    {
+        return item.Comments.Select(c => new CommentModel()
+        {
+            Comment = c.Content,
+            CreatedBy = c.CreatedBy,
+            CreatedDate = c.CreatedDate
+        }).ToList();
+    }
+
+    private static List<CommentModel> GetEditorComments(Post item)
+    {
+        return item.Trackings.Where(t => t.LastStatus &&
+                t.PostStatus == PostStatus.Rejected &&
+                !string.IsNullOrWhiteSpace(t.Comments)
+              ).Select(c => new CommentModel()
+              {
+                  Comment = c.Comments,
+                  CreatedBy = c.ReviewerId.ToString(),
+                  CreatedDate = c.LastModifiedDate
+              }).ToList();
+    }
+
+    private static DateTime? GetPublicationDate(Post item)
+    {
+        var trackings = item.Trackings.Where(x =>
+                                    x.LastStatus &&
+                                    x.PostStatus == PostStatus.Published
+                              );
+        return trackings.Any() ? trackings.FirstOrDefault().LastModifiedDate : null;
+    }
+
+    private static bool ValidateStatusChangeFlow(Post post, PostStatus newStatus)
+    {
+        switch (post.Status)
+        {
+            case PostStatus.New:
+                return newStatus == PostStatus.New || newStatus == PostStatus.Submitted;
+            case PostStatus.Submitted:
+                return newStatus == PostStatus.Rejected || newStatus == PostStatus.Published;
+            case PostStatus.Rejected:
+                return newStatus == PostStatus.Rejected || newStatus == PostStatus.Submitted;
+            case PostStatus.Published:
+                return true;
+        }
+        return false;
     }
 
     #endregion
