@@ -240,7 +240,8 @@ public class PostService : IPostService
                 Title = item.Title,
                 Status = item.Status.ToString(),
                 UserComments = GetUsersComments(item),
-                EditorComments = editorComments
+                EditorComments = editorComments,
+                PostId = item.PostId
             };
         }
     }
